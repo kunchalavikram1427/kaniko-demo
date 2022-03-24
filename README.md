@@ -65,3 +65,50 @@ kubectl create secret docker-registry regcred --docker-server=https://index.dock
       -v, --verbosity string                          Log level (trace, debug, info, warn, error, fatal, panic) (default "info")
     
     Use "executor [command] --help" for more information about a command.
+
+
+### Build Log
+
+    $ kubectl logs -f kaniko
+    Enumerating objects: 16, done.
+    Counting objects: 100% (16/16), done.
+    Compressing objects: 100% (10/10), done.
+    Total 16 (delta 6), reused 15 (delta 5), pack-reused 0
+    ←[36mINFO←[0m[0003] Using dockerignore file: /kaniko/buildcontext/.dockerignore
+    ←[36mINFO←[0m[0003] Retrieving image manifest python:3.9.7-alpine3.14
+    ←[36mINFO←[0m[0003] Retrieving image python:3.9.7-alpine3.14 from registry index.docker.io
+    ←[36mINFO←[0m[0006] Built cross stage deps: map[]
+    ←[36mINFO←[0m[0006] Retrieving image manifest python:3.9.7-alpine3.14
+    ←[36mINFO←[0m[0006] Returning cached image manifest
+    ←[36mINFO←[0m[0006] Executing 0 build triggers
+    ←[36mINFO←[0m[0006] Unpacking rootfs as cmd RUN pip install flask requires it.
+    ←[36mINFO←[0m[0012] RUN pip install flask
+    ←[36mINFO←[0m[0012] Taking snapshot of full filesystem...        
+    ←[36mINFO←[0m[0012] cmd: /bin/sh
+    Collecting flask
+      Downloading Flask-2.0.3-py3-none-any.whl (95 kB)
+    Collecting Werkzeug>=2.0
+      Downloading Werkzeug-2.0.3-py3-none-any.whl (289 kB)
+    Collecting itsdangerous>=2.0
+      Downloading itsdangerous-2.1.2-py3-none-any.whl (15 kB)
+    Collecting click>=7.1.2
+      Downloading click-8.0.4-py3-none-any.whl (97 kB)
+    Collecting Jinja2>=3.0
+      Downloading Jinja2-3.1.0-py3-none-any.whl (132 kB)
+    Collecting MarkupSafe>=2.0
+      Downloading MarkupSafe-2.1.1-cp39-cp39-musllinux_1_1_x86_64.whl (29 kB)
+    Installing collected packages: MarkupSafe, Werkzeug, Jinja2, itsdangerous, click, flask
+    Successfully installed Jinja2-3.1.0 MarkupSafe-2.1.1 Werkzeug-2.0.3 click-8.0.4 flask-2.0.3 itsdangerous-2.1.2
+    WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+    WARNING: You are using pip version 21.2.4; however, version 22.0.4 is available.You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+    ←[36mINFO←[0m[0018] Taking snapshot of full filesystem...
+    ←[36mINFO←[0m[0018] WORKDIR /app
+    ←[36mINFO←[0m[0018] cmd: workdir
+    ←[36mINFO←[0m[0018] Changed working directory to /app
+    ←[36mINFO←[0m[0018] Creating directory /app
+    ←[36mINFO←[0m[0018] Taking snapshot of files...
+    ←[36mINFO←[0m[0018] COPY app.py .
+    ←[36mINFO←[0m[0018] Taking snapshot of files...
+    ←[36mINFO←[0m[0018] ENTRYPOINT ["python", "app.py"]
+    ←[36mINFO←[0m[0018] Pushing image to kunchalavikram/kaniko-demo-image:latest
+    ←[36mINFO←[0m[0026] Pushed index.docker.io/kunchalavikram/kaniko-demo-image@sha256:ba64ddfbec0d94e02dc9e5ab88b8cb64dabc59b55eff25d4ea71725687837ea7

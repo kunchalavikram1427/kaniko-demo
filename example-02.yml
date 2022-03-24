@@ -17,7 +17,7 @@ spec:
   volumes:
     - name: app-files
       hostPath:
-        path: /home/ec2-user/kaniko-demo
+        path:  /c/Users/vikram/OneDrive/Study/DevOps/Kubernetes/Templates/my_manifests/kaniko # /home/ec2-user/kaniko-demo
         type: Directory
     - name: kaniko-secret
       secret:
