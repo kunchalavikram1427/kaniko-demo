@@ -17,7 +17,7 @@ spec:
   volumes:
     - name: app-files
       hostPath:
-        path: /home/ec2-user/connected-app
+        path: /home/ec2-user/kaniko-demo
         type: Directory
     - name: kaniko-secret
       secret:
