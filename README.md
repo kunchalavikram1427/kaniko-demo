@@ -1,13 +1,15 @@
 # Kaniko
 
 > Build Docker Images with Docker Daemon
+
+### First create a kubernetes secret with docker registry credentials
 ```sh
 kubectl create secret docker-registry regcred --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-pword> --docker-email=<your-email>
 ```
 ```sh
 kubectl create secret docker-registry regcred --docker-server=https://index.docker.io/v1/ --docker-username=kunchalavikram --docker-password=<your-pword> 
 ```
-### Using the Executor(Help text)
+### Using the Executor: Various command-line flags
     Usage:
       executor [flags]
       executor [command]
