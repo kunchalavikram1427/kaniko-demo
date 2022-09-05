@@ -7,22 +7,13 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
     args: 
-    - "--destination=kunchalavikram/kaniko-demo-image:latest"
+    - "--no-push"
     volumeMounts:
       - name: app-files
         mountPath: /workspace
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
     - name: app-files
       hostPath:
         path:  /c/Users/vikram/OneDrive/Study/DevOps/Kubernetes/Templates/my_manifests/kaniko-demo # /home/ec2-user/kaniko-demo
         type: Directory
-    - name: kaniko-secret
-      secret:
-        secretName: regcred
-        items:
-          - key: .dockerconfigjson
-            path: config.json
-

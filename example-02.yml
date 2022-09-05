@@ -1,3 +1,5 @@
+# If pulling from Private Repository
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -6,23 +8,26 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
-    args: 
+    args:
+    - "--dockerfile=Dockerfile"
+    - "--context=git://github.com/kunchalavikram1427/kaniko-demo.git" #git://github.com/kunchalavikram1427/connected-app.git#refs/heads/master
     - "--destination=kunchalavikram/kaniko-demo-image:latest"
+    env:
+    - name: GIT_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: git-token
+          key: GIT_TOKEN
     volumeMounts:
-      - name: app-files
-        mountPath: /workspace
-      - name: kaniko-secret
-        mountPath: /kaniko/.docker
+    - name: kaniko-secret
+      mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
-    - name: app-files
-      hostPath:
-        path:  /c/Users/vikram/OneDrive/Study/DevOps/Kubernetes/Templates/my_manifests/kaniko-demo # /home/ec2-user/kaniko-demo
-        type: Directory
-    - name: kaniko-secret
-      secret:
-        secretName: regcred
-        items:
-          - key: .dockerconfigjson
-            path: config.json
+  - name: kaniko-secret
+    secret:
+      secretName: regcred
+      items:
+        - key: .dockerconfigjson
+          path: config.json
 
+# kubectl create secret generic git-token --from-literal='GIT_TOKEN=<your-token>'
