@@ -62,7 +62,7 @@ pipeline {
     stage('Build Container Image'){
       steps {
         container('kaniko'){
-          sh "/kaniko/executor --context `pwd` --destination $IMAGE_NAME:$IMAGE_TAG"
+          sh "/kaniko/executor --context $WORKSPACE --destination $IMAGE_NAME:$IMAGE_TAG"
         }
       }
     }
